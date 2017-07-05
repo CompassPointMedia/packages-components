@@ -559,10 +559,10 @@ if($adminMode){
 	<input type="button" name="button" value="Execute Code" onclick="jsEval(g('test').value);"><br />
 </div>
 <div id="ctrlSection" style="display:<?php echo $testModeC?'block':'none'?>">
-	<iframe name="w1" src="Library/blank.htm"></iframe>
-	<iframe name="w2" src="Library/blank.htm"></iframe>
-	<iframe name="w3" src="Library/blank.htm"></iframe>
-	<iframe name="w4" src="Library/blank.htm"></iframe>
+	<iframe name="w1" src="/blank.htm"></iframe>
+	<iframe name="w2" src="/blank.htm"></iframe>
+	<iframe name="w3" src="/blank.htm"></iframe>
+	<iframe name="w4" src="/blank.htm"></iframe>
 </div>
 
 </body>
