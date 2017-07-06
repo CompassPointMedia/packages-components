@@ -221,8 +221,10 @@ switch($RecipientMethod){
 		$err[1]['Complex']='The email column(s) you selected don\'t contain valid email addresses!  Click Select Email Column(s).., look for the column(s) containing an email address, and check the box for the column number.  Then click Use Selected Columns';
 	break;
 	default:
+	    /*
 		errLevel(2);
 		$err[2]['RecipientMethod']='You have not selected any recipients.  Click the Select Recipients tab, and select a method.  If you need further assistance click the Help tab.';
+	    */
 	break;
 }
 //------------ SECTION TWO: Composition and correctness of the email
