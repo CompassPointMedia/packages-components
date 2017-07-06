@@ -198,9 +198,6 @@ $MASTER_COMPONENT_ROOT=
 $COMPONENT_ROOT=		$_SERVER['DOCUMENT_ROOT'].'/components';
 $LOCAL_COMPONENT_ROOT=	$_SERVER['DOCUMENT_ROOT'].'/components-local';
 $EMAIL_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/emails';
-$PROTOCOL_ROOT=			'/home/phplib/public_html/devteam/php/protocols';
-$SNIPPET_ROOT=			'/home/phplib/public_html/devteam/php/snippets';
-$SQL_ROOT=				'/home/phplib/public_html/devteam/php/sql';
 
 //standard functions
 if(!function_exists('CMSB'))
@@ -314,7 +311,7 @@ $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
 if(!$fromHdrNormal)		$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
 if(!$fromHdrNotices)	$fromHdrNotices='From: notices@'.$siteDomain;
 if(!$fromHdrBugs)		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(!$developerEmail)	$developerEmail='sam.fullman@verizon.net';
+if(!$developerEmail)	$developerEmail='sam-git@compasspointmedia.com';
 if(!$adminEmail)		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart

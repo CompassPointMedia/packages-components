@@ -282,9 +282,6 @@ $MASTER_COMPONENT_ROOT=
 $COMPONENT_ROOT=		$_SERVER['DOCUMENT_ROOT'].'/components';
 $LOCAL_COMPONENT_ROOT=	$_SERVER['DOCUMENT_ROOT'].'/components-local';
 $EMAIL_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/emails';
-$PROTOCOL_ROOT=			'/home/phplib/public_html/devteam/php/protocols';
-$SNIPPET_ROOT=			'/home/phplib/public_html/devteam/php/snippets';
-$SQL_ROOT=				'/home/phplib/public_html/devteam/php/sql';
 
 //standard functions - 2017-07-05, checked for duplicates and ordered
 foreach( [
@@ -346,7 +343,7 @@ $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
 if(empty($fromHdrNormal))	$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
 if(empty($fromHdrNotices))	$fromHdrNotices='From: notices@'.$siteDomain;
 if(empty($fromHdrBugs))		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(empty($developerEmail))	$developerEmail='sam.fullman@verizon.net';
+if(empty($developerEmail))	$developerEmail='sam-git@compasspointmedia.com';
 if(empty($adminEmail))		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart

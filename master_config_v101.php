@@ -176,9 +176,6 @@ $CONSOLE_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/confi
 $MASTER_COMPONENT_ROOT=$COMPONENT_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'components';
 $LOCAL_COMPONENT_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'components-local';
 $EMAIL_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'emails';
-$PROTOCOL_ROOT='/home/rbase/lib/devteam/php/protocols';
-$SNIPPET_ROOT='/home/rbase/lib/devteam/php/snippets';
-$SQL_ROOT='/home/rbase/lib/devteam/php/sql';
 
 //standard functions
 if(!$suppressFunctionFiles){
@@ -293,7 +290,7 @@ $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
 if(!$fromHdrNormal)		$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
 if(!$fromHdrNotices)	$fromHdrNotices='From: notices@'.$siteDomain;
 if(!$fromHdrBugs)		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(!$developerEmail)	$developerEmail='sam.fullman@verizon.net';
+if(!$developerEmail)	$developerEmail='sam-git@compasspointmedia.com';
 if(!$adminEmail)		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart

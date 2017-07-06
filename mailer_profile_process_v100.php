@@ -21,7 +21,7 @@ Array
     [TemplateLocationURL] => http://www.relatebase.com/Templates/mail/mail_sample.dwt
     [select] => dw40
     [FromName] => Samuel Fullman
-    [FromEmail] => sam.fullman@verizon.net
+    [FromEmail] => sam-git@compasspointmedia.com
     [ReplyToName] => (optional)
     [ReplyToEmail] => (optional)
     [BounceEmail] => (optional)
@@ -448,7 +448,7 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 
 		$sendCount++;
 		enhanced_mail($options=array(
-			'to'=> ($TestMode ? $TestEmail : $v) /* 'sfullman@compasspointmedia.com' */,
+			'to'=> ($TestMode ? $TestEmail : $v) /* 'sam-git@compasspointmedia.com' */,
 			'subject'=> stripslashes($thisEmailSubject),
 			'body'=> str_replace('{CurrentEmailSent}',$v,$thisEmailBody),
 			'from'=> stripslashes($from),
@@ -466,7 +466,7 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 			'mailedBy'=> $PHP_AUTH_USER,
 		)); 
 
-		/* old:delete by 6/30/2011 - enhanced_mail(/*$v* / 'sfullman@compasspointmedia.com', stripslashes($thisEmailSubject), $thisEmailBody, stripslashes($from), $sendType, (count($fileArray)?$fileArray:''), ($Importance==1?1:0), $preHeaders, '', '', ($bounce?$bounce:'') ); */
+		/* old:delete by 6/30/2011 - enhanced_mail(/*$v* / 'sam-git@compasspointmedia.com', stripslashes($thisEmailSubject), $thisEmailBody, stripslashes($from), $sendType, (count($fileArray)?$fileArray:''), ($Importance==1?1:0), $preHeaders, '', '', ($bounce?$bounce:'') ); */
 		
 		//log emails used to send batches twice
 		if(!in_array($v,$emailSentList)){

@@ -527,7 +527,7 @@ var ab='<?php echo $nullAbs?>';
 				<span class="style3">Seema Nikam</span> - coder and fearless testing Ninja [<a href="mailto:seema@compasspointmedia.com">email</a>] <br />
 				<span class="style3">Josh Higgins</span> - 
 		graphic designer and &quot;skin&quot; guy [<a href="mailto:josh@compasspointmedia.com">email</a>] <br />
-			and <a href="mailto:reroute@compasspointmedia.com">Samuel Fullman</a>, who has an occasional development and improvement idea </p>
+			and <a href="mailto:sam-git@compasspointmedia.com">Samuel Fullman</a>, who has an occasional development and improvement idea </p>
 			<p>For help (itself a work in progress), go to the <a href="http://dev.compasspointmedia.com/mediawiki-1.13.2/index.php?title=CMS_Bridge_Public_Documentation" target="help">CMSB Wiki Section</a><br />
 				For assistance and suggestions contact us at the emails above
 </p>
