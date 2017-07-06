@@ -8,11 +8,11 @@
  * v1.01 - Sam did some organization and defaulting, better positioning for function-related vars;
  * v1.00 - by Parker, good start
 */
-if(!$cnxKey)$cnxKey=$MASTER_DATABASE;
+if(empty($cnxKey)) $cnxKey=$MASTER_DATABASE;
 $hideMembershipDirectoryLink = $hideEventCalendarLink = $hideContactUsLink = $hideSiteMapLink = true;
 
-if(!$suppressSessionStart){
-	if(strlen($sessionid)){
+if(empty($suppressSessionStart)){
+	if(!empty($sessionid)){
 		$PHPSESSID=$sessionid;
 		session_id($sessionid);
 	}
@@ -75,23 +75,59 @@ if(isset($suppressWWWRedirection) && !empty($suppressWWWRedirection) && count(ex
 }
 
 //shorthand
-$my_cnx=$_SESSION['cnx'][$cnxKey];
+$my_cnx = !empty($_SESSION['cnx'][$cnxKey]) ? $_SESSION['cnx'][$cnxKey] : '';
 
 //time function for benchmarking
 if(!function_exists('gmicrotime')){
-	function gmicrotime($n=''){
-		#version 1.1, 2007-05-09
-		//store array of all calls
-		global $mT;
-		list($usec, $sec) = explode(' ',microtime());
-		$t=round((float)$usec + (float)$sec,6);
-		$mT['all'][]=$t;
-		if($n)$mT[$n][]=$t;
-		//return elapsed since last call (in the local array)
-		$u=($n?$mT[$n]:$mT['all']);
-		if(count($u)>1)return round(1000*($u[count($u)-1]-$u[count($u)-2]),6);
-	}
-	gmicrotime('initial');
+    /**
+     * @param string $marker
+     * @param array $options
+     * @return void
+     */
+    function gmicrotime($marker='', $options=[]){
+        #version 1.2, 2017-05-13
+
+        extract($options);
+        if(!isset($mem)) $mem = true; // || false, don't worry about memory
+        if(!isset($format)) $format = 'array'; // || string
+
+        global $mT;
+        if($marker=='all') return $mT;
+
+        list($usec, $sec) = explode(' ',microtime());
+        $t=round((float)$usec + (float)$sec,6);
+
+        if($format == 'string'){
+            $value = $t;
+        }else{
+            $value = ['time'=>$t];
+        }
+        if($mem){
+            $_mem = memory_get_usage();
+            $_max = memory_get_peak_usage();
+            if($format == 'string'){
+                $value .= ":$mem:$max";
+            }else{
+                $value['memory'] = $_mem;
+                $value['max'] = $_max;
+            }
+        }
+
+        //store everything in this array
+        $mT['all'][]=$value;
+
+        //build associative 1-indexed array
+        if(empty($mT['indexed'][$marker])){
+            $mT['indexed'][$marker]=$value;
+        }else{
+            if(is_array($mT['indexed'][$marker])){
+                $mT['indexed'][$marker][ count($mT['indexed'][$marker])+1 ]=$value;
+            }else{
+                $mT['indexed'][$marker][1]=array($mT['indexed'][$marker], $value);
+            }
+        }
+    }
+    gmicrotime('initialize');
 }
 $ctime=time();
 
@@ -107,7 +143,7 @@ $SERVER_STATE='Texas';
 if(isset($monitorToken) && $monitorToken==md5($MASTER_PASSWORD))echo "\n".$monitorToken."\n";
 
 //thispage, thisfolder, now thisnode
-if($_SERVER['REDIRECT_STATUS']==404){
+if(!empty($_SERVER['REDIRECT_STATUS']) && $_SERVER['REDIRECT_STATUS']==404){
 	//2009-04-24, new method: presumed 404 page masquerading as other page, get page from REQUEST_URI
 	$a=explode('/',ltrim($_SERVER['REDIRECT_URL'],'/'));
 	$thispage=$a[count($a)-1];
@@ -130,13 +166,13 @@ if($_SERVER['REDIRECT_STATUS']==404){
 	@extract($a);
 }else{
     //previous page/folder method
-	if($thispage=='403.shtml'){
-		mail('samuelf@compasspointmedia.com','problem with 403.shtml','was caused when cgi symlink was not resolving to cgi_2.8.6','From: bugreports@'.$_SERVER['SERVER_NAME']);
+	if(!empty($thispage) && $thispage == '403.shtml'){
+		mail('sam-git@compasspointmedia.com','problem with 403.shtml','was caused when cgi symlink was not resolving to cgi_2.8.6','From: bugreports@'.$_SERVER['SERVER_NAME']);
 	}
-    if(!strlen($thispage) || !isset($thisfolder)){
+    if(empty($thispage) || empty($thisfolder)){
 		//note the logic here in case page presented is from rewriteengine
-        $a=preg_split('/\\\|\//',ltrim($_SERVER['REDIRECT_URL'] ? $_SERVER['REDIRECT_URL'] : $_SERVER['SCRIPT_NAME'],'/'));
-		$thispage=$a[count($a)-1];
+        $a=preg_split('/\\\|\//',ltrim( !empty($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : $_SERVER['SCRIPT_NAME'],'/'));
+		$thispage = $a[count($a)-1];
 		if(count($a)>1){
 			$thisfolder=$a[0];
 		}else{
@@ -173,13 +209,13 @@ if(!empty($langs['recognized'])){
 }
 
 //redirect on login required pages; loginView=1 is the simplest login view
-if($loginRequired==1 && !$_SESSION['identity']){
+if(!empty($loginRequired) && $loginRequired == 1 && empty($_SESSION['identity'])){
 	header('Location: /cgi/login.php?loginView='.($loginView ? $loginView : 1).'&src='.urlencode($_SERVER['PHP_SELF'].($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : '')));
 	exit;
 }
 
 //useful concept but as of 2011-02-19 not used to my knowledge - SF
-if($a=$_SESSION['special']['requestSetCookie']){
+if(!empty($_SESSION['special']['requestSetCookie']) && is_array($_SESSION['special']['requestSetCookie'])){
 	foreach($a as $n=>$v){
 		continue; //not used
 		setcookie($n,$v,time()+(3600*24*180*(is_null($v)?-1:1)),'/' /*,preg_replace('/^www\./i','',$_SERVER['HTTP_HOST'])*/);
@@ -190,7 +226,7 @@ if($a=$_SESSION['special']['requestSetCookie']){
 
 
 //THESE ARE TEMPORARY until we have a login system front and back
-if(!$_SESSION['systemUserName'] && $_SERVER['PHP_AUTH_USER']){
+if(empty($_SESSION['systemUserName']) && !empty($_SERVER['PHP_AUTH_USER'])){
 	$_SESSION['systemUserName']=$_SERVER['PHP_AUTH_USER'];
 }
 
@@ -212,7 +248,8 @@ define('ADMIN_MODE_GOD',256);
 if(isset($adminMode) && $adminMode==='0'){
 	unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
 	$adminMode=false;
-}else if($n=$_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+}else if(!empty($_SESSION['special'][$MASTER_DATABASE]['adminMode'])){
+    $n = $_SESSION['special'][$MASTER_DATABASE]['adminMode'];
 	if(isset($setAdminMode)){
 		/*
 		2011-07-18
@@ -249,111 +286,53 @@ $PROTOCOL_ROOT=			'/home/phplib/public_html/devteam/php/protocols';
 $SNIPPET_ROOT=			'/home/phplib/public_html/devteam/php/snippets';
 $SQL_ROOT=				'/home/phplib/public_html/devteam/php/sql';
 
-//standard functions
-if(!function_exists('CMSB'))
-require($FUNCTION_ROOT.'/function_CMSB_v311.php');
-if(!function_exists('enhanced_mail'))
-require($FUNCTION_ROOT.'/function_enhanced_mail_v210.php');
-if(!function_exists('enhanced_parse_url'))
-require($FUNCTION_ROOT.'/function_enhanced_parse_url_v100.php');
-if(!function_exists('get_file_assets'))
-require($FUNCTION_ROOT.'/function_get_file_assets_v100.php');
-if(!function_exists('image_dims'))
-require($FUNCTION_ROOT.'/function_image_dims_v100.php');
-if(!function_exists('js_email_encryptor'))
-require($FUNCTION_ROOT.'/function_js_email_encryptor_v100.php');
-if(!function_exists('metatags_i1'))
-require($FUNCTION_ROOT.'/function_metatags_i1_v101.php');
-if(!function_exists('pk_encode'))
-require($FUNCTION_ROOT.'/function_pk_encode_decode.php');
-if(!function_exists('prn'))
-require($FUNCTION_ROOT.'/function_prn.php');
-if(!function_exists('q'))
-require($FUNCTION_ROOT.'/function_q_v130.php');
-if(!function_exists('t'))
-require($FUNCTION_ROOT.'/function_t_v111.php');
-if(!function_exists('site_track'))
-require($FUNCTION_ROOT.'/function_site_track_v101.php');
-if(!function_exists('sql_insert_update_generic'))
-require($FUNCTION_ROOT.'/function_sql_insert_update_generic_v110.php');
-if(!function_exists('stats_collection'))
-require($FUNCTION_ROOT.'/function_stats_collection_v120.php');
-if(!function_exists('sql_autoinc_text'))
-require($FUNCTION_ROOT.'/function_sql_autoinc_text_v232.php');
-if(!function_exists('subkey_sort'))
-require($FUNCTION_ROOT.'/function_array_subkey_sort_v203.php');
-if(!function_exists('mysql_declare_table_rtcs'))
-require($FUNCTION_ROOT.'/function_mysql_declare_table_rtcs_v200.php');
-if(!function_exists('tree_functions'))
-require($FUNCTION_ROOT.'/group_tree_functions_v100.php');
-if(!function_exists('get_table_indexes'))
-require($FUNCTION_ROOT.'/function_get_table_indexes_v101.php');
-if(!function_exists('get_contents'))
-require($FUNCTION_ROOT.'/function_get_contents_v100.php');
-if(!function_exists('shopping_cart'))
-require($FUNCTION_ROOT.'/function_shopping_cart_v400.php');
-if(!function_exists('generic5t'))
-require($FUNCTION_ROOT.'/function_generic5t_v100.php');
-if(!function_exists('q'))
-require($FUNCTION_ROOT.'/function_q_v130.php');
-if(!function_exists('prn'))
-require($FUNCTION_ROOT.'/function_prn.php');
-if(!function_exists('xml_read_tags'))
-require($FUNCTION_ROOT.'/function_xml_read_tags_v134.php');
-if(!function_exists('sql_insert_update_generic'))
-require($FUNCTION_ROOT.'/function_sql_insert_update_generic_v100.php');
-if(!function_exists('sql_autoinc_text'))
-require($FUNCTION_ROOT.'/function_sql_autoinc_text_v232.php');
-if(!function_exists('array_transpose'))
-require($FUNCTION_ROOT.'/function_array_transpose.php');
-if(!function_exists('array_merge_accurate'))
-require($FUNCTION_ROOT.'/function_array_merge_accurate_v100.php');
-if(!function_exists('quasi_resource_generic'))
-require($FUNCTION_ROOT.'/function_quasi_resource_generic_v201.php');
-if(!function_exists('replace_form_elements'))
-require($FUNCTION_ROOT.'/function_replace_form_elements_v100.php');
-if(!function_exists('enhanced_mail'))
-require($FUNCTION_ROOT.'/function_enhanced_mail_v210.php');
-if(!function_exists('navigate'))
-require($FUNCTION_ROOT.'/function_navigate_v141a.php');
-if(!function_exists('callback'))
-require($FUNCTION_ROOT.'/function_callback_v101.php');
-if(!function_exists('t'))
-require($FUNCTION_ROOT.'/function_t_v111.php');
-if(!function_exists('get_navstats'))
-require($FUNCTION_ROOT.'/function_get_navstats_v110.php');
-if(!function_exists('parse_query'))
-require($FUNCTION_ROOT.'/function_parse_query_v200.php');
-if(!function_exists('relatebase_dataobjects_settings'))
-require($FUNCTION_ROOT.'/function_relatebase_dataobjects_settings_v100.php');
-if(!function_exists('set_priority'))
-require($FUNCTION_ROOT.'/function_set_priority_v110.php');
-if(!function_exists('mysql_declare_field_attributes_rtcs'))
-require($FUNCTION_ROOT.'/function_mysql_declare_field_attributes_rtcs_v100.php');
-if(!function_exists('mysql_declare_table_rtcs'))
-require($FUNCTION_ROOT.'/function_mysql_declare_table_rtcs_v200.php');
-if(!function_exists('rb_vars'))
-require($FUNCTION_ROOT.'/function_rb_vars_v120.php');
-if(!function_exists('get_table_indexes'))
-require($FUNCTION_ROOT.'/function_get_table_indexes_v101.php');
-if(!function_exists('get_file_assets'))
-require($FUNCTION_ROOT.'/function_get_file_assets_v100.php');
-if(!function_exists('get_contents'))
-require($FUNCTION_ROOT.'/function_get_contents_v100.php');
-if(!function_exists('tree_functions'))
-require($FUNCTION_ROOT.'/group_tree_functions_v100.php');
-if(!function_exists('text_functions'))
-require($FUNCTION_ROOT.'/group_text_functions_v100.php');
-if(!function_exists('array_alter_table'))
-require($FUNCTION_ROOT.'/function_array_alter_table_v100.php');
-if(!function_exists('subkey_sort'))
-require($FUNCTION_ROOT.'/function_array_subkey_sort_v203.php');
-if(!function_exists('is_logical'))
-require($FUNCTION_ROOT.'/function_is_logical_v100.php');
-if(!function_exists('pJ'))
-require($FUNCTION_ROOT.'/group_pJ_v100.php');
-if(!function_exists('attach_download'))
-require($FUNCTION_ROOT.'/function_attach_download_v100.php');
+//standard functions - 2017-07-05, checked for duplicates and ordered
+foreach( [
+    'function_array_alter_table_v100',
+    'function_array_merge_accurate_v100',
+    'function_array_subkey_sort_v203',
+    'function_array_transpose',
+    'function_attach_download_v100',
+    'function_callback_v101',
+    'function_CMSB_v311',
+    'function_enhanced_mail_v211',
+    'function_enhanced_parse_url_v100',
+    'function_generic5t_v100',
+    'function_get_contents_v100',
+    'function_get_file_assets_v100',
+    'function_get_navstats_v110',
+    'function_get_table_indexes_v101',
+    'function_image_dims_v100',
+    'function_is_logical_v100',
+    'function_js_email_encryptor_v100',
+    'function_metatags_i1_v101',
+    'function_mm_v110',
+    'function_mysql_declare_field_attributes_rtcs_v100',
+    'function_mysql_declare_table_rtcs_v200',
+    'function_navigate_v141a',
+    'function_parse_query_v200',
+    'function_pk_encode_decode',
+    'function_prn',
+    'function_q_v130',
+    'function_quasi_resource_generic_v201',
+    'function_rb_vars_v120',
+    'function_relatebase_dataobjects_settings_v100',
+    'function_replace_form_elements_v100',
+    'function_set_priority_v110',
+    'function_shopping_cart_v400',
+    'function_site_track_v101',
+    'function_sql_autoinc_text_v232',
+    'function_sql_insert_update_generic_v110',
+    'function_stats_collection_v120',
+    'function_t_v111',
+    'function_tabs_enhanced_v300',
+    'function_xml_read_tags_v134',
+    'group_pJ_v100',
+    'group_text_functions_v100',
+    'group_tree_functions_v100',
+] as $function){
+    require_once($FUNCTION_ROOT . '/' . $function . '.php');
+}
 
 //function settings
 if(!$overrideGeneric5tDecoding)$MASTER_PASSWORD=generic5t($MASTER_PASSWORD,'decode', array('super'=>1));
@@ -364,11 +343,11 @@ if(!isset($enhanced_mail['logmail']))$enhanced_mail['logmail']=true; //implement
 $siteRootEmailAccount='info';
 $a=explode('.',$_SERVER['SERVER_NAME']);
 $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
-if(!$fromHdrNormal)		$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
-if(!$fromHdrNotices)	$fromHdrNotices='From: notices@'.$siteDomain;
-if(!$fromHdrBugs)		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(!$developerEmail)	$developerEmail='sam.fullman@verizon.net';
-if(!$adminEmail)		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
+if(empty($fromHdrNormal))	$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
+if(empty($fromHdrNotices))	$fromHdrNotices='From: notices@'.$siteDomain;
+if(empty($fromHdrBugs))		$fromHdrBugs='From: bugreports@'.$siteDomain;
+if(empty($developerEmail))	$developerEmail='sam.fullman@verizon.net';
+if(empty($adminEmail))		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart
 /*
