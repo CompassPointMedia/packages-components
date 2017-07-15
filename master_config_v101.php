@@ -174,7 +174,6 @@ $normalTitles = array('Mr.','Mrs.','Dr.','Rev.','Ms.');
 $FUNCTION_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'functions';
 $CONSOLE_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'console';
 $MASTER_COMPONENT_ROOT=$COMPONENT_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'components';
-$LOCAL_COMPONENT_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'components-local';
 $EMAIL_ROOT=preg_replace('/config\.php$/','',$_SERVER['DOCUMENT_ROOT'].'/config.php').'emails';
 
 //standard functions

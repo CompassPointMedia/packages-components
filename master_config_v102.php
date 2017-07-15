@@ -196,7 +196,6 @@ $FEX_ROOT=				$_SERVER['DOCUMENT_ROOT'].'/admin/file_explorer';
 $CONSOLE_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/console';
 $MASTER_COMPONENT_ROOT=
 $COMPONENT_ROOT=		$_SERVER['DOCUMENT_ROOT'].'/components';
-$LOCAL_COMPONENT_ROOT=	$_SERVER['DOCUMENT_ROOT'].'/components-local';
 $EMAIL_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/emails';
 
 //standard functions

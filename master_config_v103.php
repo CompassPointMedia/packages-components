@@ -278,9 +278,7 @@ $normalTitles = array('Mr.','Mrs.','Dr.','Rev.','Ms.');
 $FUNCTION_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/functions';
 $FEX_ROOT=				$_SERVER['DOCUMENT_ROOT'].'/admin/file_explorer';
 $CONSOLE_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/console';
-$MASTER_COMPONENT_ROOT=
-$COMPONENT_ROOT=		$_SERVER['DOCUMENT_ROOT'].'/components';
-$LOCAL_COMPONENT_ROOT=	$_SERVER['DOCUMENT_ROOT'].'/components-local';
+$MASTER_COMPONENT_ROOT = $COMPONENT_ROOT = $_SERVER['DOCUMENT_ROOT'].'/components';
 $EMAIL_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/emails';
 
 //standard functions - 2017-07-05, checked for duplicates and ordered
