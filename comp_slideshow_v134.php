@@ -391,7 +391,7 @@ if(count($ssPictures)){
 	if($ssHelp){
 		?><div id="ssHelp">
 		This is the slideshow help system.<br />
-		<a href="http://www.compasspointmedia.com/mw/index.php?title=Slide_Show" target="_blank">Slide Show Help Wiki</a><br />
+		<a href="http://www.compasspoint-sw.com/mw/index.php?title=Slide_Show" target="_blank">Slide Show Help Wiki</a><br />
 		<a href="#" onclick="g('ssSettings').style.display='block';">show settings</a>
 		<div id="ssSettings" style="display:none;">
 		<?php 

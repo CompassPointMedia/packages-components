@@ -21,7 +21,7 @@ Array
     [TemplateLocationURL] => http://www.relatebase.com/Templates/mail/mail_sample.dwt
     [select] => dw40
     [FromName] => Samuel Fullman
-    [FromEmail] => sam-git@compasspointmedia.com
+    [FromEmail] => sam-git@samuelfullman.com
     [ReplyToName] => (optional)
     [ReplyToEmail] => (optional)
     [BounceEmail] => (optional)
@@ -200,7 +200,7 @@ if(trim($AttachmentList)){
 			"Account: $acct
 			Time ".date('Y-m-d H:i:s')."
 			Mail Profile: $ID
-			User: $cu", "From: bugreports@relatebase.com");
+			User: $cu", "From: bugreports@compasspoint-sw.com");
 			continue;
 		}
 		$rdAttach=mysqli_fetch_array($result);
@@ -211,7 +211,7 @@ if(trim($AttachmentList)){
 			"Account: $acct
 			Time ".date('Y-m-d H:i:s')."
 			Mail Profile: $ID
-			User: $cu", "From: bugreports@relatebase.com");
+			User: $cu", "From: bugreports@compasspoint-sw.com");
 			continue;
 		}
 		$fileArrayAll[]="$VOS_ROOT/$acct/".$rdAttach[VOSFileName];
@@ -226,7 +226,7 @@ $fileArrayNameAll["/home/cpm052/public_html/resources/pdf/Order-Form-New-Pricing
 $fileArray=$fileArrayAll;
 $fileArrayName=$fileArrayNameAll;
 $emailSentList=array();
-//assume logic compliation needed initially
+//assume logic compilation needed initially
 $bodyCompilationNeeded=true;
 $subjectCompilationNeeded=true;
 
@@ -448,7 +448,7 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 
 		$sendCount++;
 		enhanced_mail($options=array(
-			'to'=> ($TestMode ? $TestEmail : $v) /* 'sam-git@compasspointmedia.com' */,
+			'to'=> ($TestMode ? $TestEmail : $v) /* 'sam-git@samuelfullman.com' */,
 			'subject'=> stripslashes($thisEmailSubject),
 			'body'=> str_replace('{CurrentEmailSent}',$v,$thisEmailBody),
 			'from'=> stripslashes($from),
@@ -466,8 +466,6 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 			'mailedBy'=> $PHP_AUTH_USER,
 		)); 
 
-		/* old:delete by 6/30/2011 - enhanced_mail(/*$v* / 'sam-git@compasspointmedia.com', stripslashes($thisEmailSubject), $thisEmailBody, stripslashes($from), $sendType, (count($fileArray)?$fileArray:''), ($Importance==1?1:0), $preHeaders, '', '', ($bounce?$bounce:'') ); */
-		
 		//log emails used to send batches twice
 		if(!in_array($v,$emailSentList)){
 			$emailSentList[]=$v;
@@ -487,7 +485,7 @@ ob_start();
 require($MASTER_COMPONENT_ROOT.'/mailer_profile_batchreport_v100.php');
 $x=ob_get_contents();
 ob_end_clean();
-enhanced_mail($BatchRecordEmail, 'Batch Report', $x, 'batchreports@relatebase.com', 'HTML');
+enhanced_mail($BatchRecordEmail, 'Batch Report', $x, 'batchreports@compasspoint-sw.com', 'HTML');
 echo "<br />";
 echo "Batch report mailed to ".$BatchRecordEmail;
 ?>

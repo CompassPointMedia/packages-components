@@ -167,7 +167,7 @@ if(!empty($_SERVER['REDIRECT_STATUS']) && $_SERVER['REDIRECT_STATUS']==404){
 }else{
     //previous page/folder method
 	if(!empty($thispage) && $thispage == '403.shtml'){
-		mail('sam-git@compasspointmedia.com','problem with 403.shtml','was caused when cgi symlink was not resolving to cgi_2.8.6','From: bugreports@'.$_SERVER['SERVER_NAME']);
+		mail('sam-git@samuelfullman.com','problem with 403.shtml','was caused when cgi symlink was not resolving to cgi_2.8.6','From: bugreports@'.$_SERVER['SERVER_NAME']);
 	}
     if(empty($thispage) || empty($thisfolder)){
 		//note the logic here in case page presented is from rewriteengine
@@ -343,7 +343,7 @@ $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
 if(empty($fromHdrNormal))	$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
 if(empty($fromHdrNotices))	$fromHdrNotices='From: notices@'.$siteDomain;
 if(empty($fromHdrBugs))		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(empty($developerEmail))	$developerEmail='sam-git@compasspointmedia.com';
+if(empty($developerEmail))	$developerEmail='sam-git@samuelfullman.com';
 if(empty($adminEmail))		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart

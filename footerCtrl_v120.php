@@ -42,7 +42,7 @@ if(!isset($enhancedSitePages))$enhancedSitePages=false; //my-chocolate-company-s
 
 
 
-if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspointmedia.com/admin_help.php?ref='.$MASTER_DATABASE;
+if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspoint-sw.com/admin_help.php?ref='.$MASTER_DATABASE;
 if(!isset($footerCtrlLeftBracket))$footerCtrlLeftBracket='[';
 if(!isset($footerCtrlRightBracket))$footerCtrlRightBracket=']';
 if(!$footerCtrlLabelEditor)$footerCtrlLabelEditor='Site Editor';
@@ -154,7 +154,7 @@ if($footerCtrlRewrite)ob_start();
 	if(!$hideSiteCredits){ 
 		ob_start();
 		?><div id="siteCredits">
-		Site design by <a href="http://www.compasspointmedia.com/?ref=<?php echo $_SERVER['HTTP_HOST']?>">Compass Point Media</a>
+		Site design by <a href="http://www.compasspoint-sw.com/?ref=<?php echo $_SERVER['HTTP_HOST']?>">Compass Point Media</a>
 		</div>
 		<?php 
 		echo $footerCtrlSiteCredits=get_contents();

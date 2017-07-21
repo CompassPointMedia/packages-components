@@ -28,7 +28,7 @@ Parker
 		The title attribute is taken from the node of the array (the 'link1' part of "link1=>array")
 */
 
-if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspointmedia.com/admin_help.php?ref='.$MASTER_DATABASE;
+if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspoint-sw.com/admin_help.php?ref='.$MASTER_DATABASE;
 if(!isset($footerCtrlLeftBracket))$footerCtrlLeftBracket='[';
 if(!isset($footerCtrlRightBracket))$footerCtrlRightBracket=']';
 if(!$footerCtrlLabelEditor)$footerCtrlLabelEditor='Site Editor';
@@ -90,7 +90,7 @@ if(false){
 		<?php }?>
 		</span>
 		<?php if(!$hideSiteCredits){ ?><div id="siteCredits">
-		Site design by <a href="http://www.compasspointmedia.com/?ref=<?php echo $_SERVER['HTTP_HOST']?>">Compass Point Media</a>	</div>
+		Site design by <a href="http://www.compasspoint-sw.com/?ref=<?php echo $_SERVER['HTTP_HOST']?>">Compass Point Media</a>	</div>
 		<?php } ?>
 	</div>	
 </div>
