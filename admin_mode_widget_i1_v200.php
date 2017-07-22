@@ -94,12 +94,12 @@ if($adminMode){
 		$hideCtrlSection=false;
 		?><div id="adminMode" <?php echo 'style="display:none;"';?>>
 			<div class="amBtn">
-				<a title="Leave Admin Access Mode" onclick="return confirm('Leave Administrative Access Mode?');" href="../admin.php?logout=1&amp;src=<?php echo urlencode($_SERVER['PHP_SELF'] . ($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : ''))?>">X</a>
+				<a title="Leave Admin Access Mode" onclick="return confirm('Leave Administrative Access Mode?');" href="../juliet-site-editor?logout=1&amp;src=<?php echo urlencode($_SERVER['PHP_SELF'] . ($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : ''))?>">X</a>
 			</div><div class="amBtn">
 				<a id="amMin" title="<?php echo $_COOKIE['amBody']=='none'?'Expand':'Minimize'?> Admin Toolbar" href="#" onclick="return adminAccessMin();"><?php echo $_COOKIE['amBody']=='none'?'+':'-'?></a>
 			</div>
 			Administrative Access Mode
-			<form id="amBody" style="display:<?php echo $_COOKIE['amBody'] ? $_COOKIE['amBody'] : 'block';?>;" action="<?php echo stristr($REQUEST_URI,'~'.$MASTER_DATABASE.'/') ? '/~'.$MASTER_DATABASE : '';?>/index_01_exe.php" target="w2" onsubmit="g('adminModeUpdate').disabled=true;return beginSubmit();" method="post">
+			<form id="amBody" style="display:<?php echo $_COOKIE['amBody'] ? $_COOKIE['amBody'] : 'block';?>;" action="<?php echo stristr($_SERVER['REQUEST_URI'],'~'.$MASTER_DATABASE.'/') ? '/~'.$MASTER_DATABASE : '';?>/index_01_exe.php" target="w2" onsubmit="g('adminModeUpdate').disabled=true;return beginSubmit();" method="post">
 			<strong>Page Title</strong>:<br />
 			<input title="<?php echo h($metatags['title']);?>" name="MetaTitle" class="amFlds" id="MetaTitle" style="border:1px solid #000;" value="<?php echo h($metatags['title']);?>" size="25" <?php 
 			if(strlen($metatags['record']['TField']) && !preg_match('/^[a-z0-9_]+$/i',$metatags['record']['TField'])){

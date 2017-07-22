@@ -35,12 +35,8 @@ Parker
 		The title attribute is taken from the node of the array (the 'link1' part of "link1=>array")
 */
 
-
-
 /* THIS IS A GLOBAL VARIABLE, NOT A FOOTER VARIABLE */
 if(!isset($enhancedSitePages))$enhancedSitePages=false; //my-chocolate-company-site-map.php - long page system
-
-
 
 if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspointmedia.com/admin_help.php?ref='.$MASTER_DATABASE;
 if(!isset($footerCtrlLeftBracket))$footerCtrlLeftBracket='[';
@@ -103,13 +99,26 @@ if($footerCtrlRewrite)ob_start();
 
 		//-------- site editor -------
 		if(!$hideSiteEditorLink){
+
+            $src = ($thispage=='juliet-site-editor' || $thispage == 'login' ? '' : 'src='.urlencode($_SERVER['REQUEST_URI']));
 			if($siteEditorLinkType=='cgi'){
-				$link=rtrim((stristr($_SERVER['SERVER_NAME'],'relatebase-rfm.com') ? '/~'.$MASTER_DATABASE : '').'/cgi/login.php?'.($adminMode ? 'logout=1&' : '').($thispage=='login.php' || $thispage=='login' ? '' : 'src='.urlencode($REQUEST_URI)),'?');
+			    $link = '/cgi/login.php?';
+			    $link .= ($adminMode ? 'logout=1&' : '');
+			    $link .= $src;
+			    $link = rtrim($link, '?&');
+
 			}else if($siteEditorLinkType=='console'){
-				$link=rtrim((stristr($_SERVER['SERVER_NAME'],'relatebase-rfm.com') ? '/~'.$MASTER_DATABASE : '').'/console/admin.php?'.($adminMode ? 'logout=1&' : '').($thispage=='admin.php' || $thispage=='admin' ? '' : 'src='.urlencode($REQUEST_URI)),'?');
+			    $link = '/console/admin?';
+			    $link .= ($adminMode ? 'logout=1&' : '');
+                $link .= $src;
+                $link = rtrim($link, '?&');
+
 			}else{
 				//basic login method
-				$link=rtrim((stristr($_SERVER['SERVER_NAME'],'relatebase-rfm.com') ? '/~'.$MASTER_DATABASE : '').'/admin.php?'.($adminMode ? 'logout=1&' : '').($thispage=='admin.php' || $thispage=='admin' ? '' : 'src='.urlencode($REQUEST_URI)),'?');
+                $link = '/juliet-site-editor?';
+                $link .= ($adminMode ? 'logout=1&' : '');
+                $link .= $src;
+                $link = rtrim($link, '?&');
 			}
 			?>
 			<span id="footerSiteEditorLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $link?>" title="<?php echo $siteName?> real-time site editor"><?php echo $adminMode?'Leave ':''?><?php echo $footerCtrlLabelEditor ?></a><?php

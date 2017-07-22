@@ -121,7 +121,7 @@ if(!$refreshComponentOnly){
 			if($topCtrlFixedSigninReturn){
 				$return=$topCtrlFixedSigninReturn;
 			}else{
-				$qs=explode('?',$REQUEST_URI);
+				$qs=explode('?',$_SERVER['REQUEST_URI']);
 				$qs=($qs[1]?$qs[1]:'');
 				if($thispage=='login' || $thispage=='login.php'){
 					$return=$src;
