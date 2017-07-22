@@ -310,7 +310,7 @@ $siteDomain=$a[count($a)-2] . '.' . $a[count($a)-1];
 if(!$fromHdrNormal)		$fromHdrNormal='From: '.$siteRootEmailAccount.'@'.$siteDomain;
 if(!$fromHdrNotices)	$fromHdrNotices='From: notices@'.$siteDomain;
 if(!$fromHdrBugs)		$fromHdrBugs='From: bugreports@'.$siteDomain;
-if(!$developerEmail)	$developerEmail='sam-git@compasspointmedia.com';
+if(!$developerEmail)	$developerEmail='sam-git@samuelfullman.com';
 if(!$adminEmail)		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 
 //location of shopping cart

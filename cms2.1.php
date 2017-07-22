@@ -247,7 +247,7 @@ var ab='<?php echo $nullAbs?>';
 			<script language="javascript" type="text/javascript">g('logoutLink').style.visibility='hidden';</script>
 			<?php } ?>
 		</div>
-		<a title="click for CMSB Help" href="http://dev.compasspointmedia.com/mediawiki-1.13.2/index.php?title=CMS_Bridge_Public_Documentation" onClick="return ow(this.href,'l2_CMSBHelp','800,700');"><img src="/images/i/CMSB-logo.gif" width="195" height="69" align="CMSB Logo" /></a>
+		<a title="click for CMSB Help" href="http://dev.compasspoint-sw.com/mediawiki-1.13.2/index.php?title=CMS_Bridge_Public_Documentation" onClick="return ow(this.href,'l2_CMSBHelp','800,700');"><img src="/images/i/CMSB-logo.gif" width="195" height="69" align="CMSB Logo" /></a>
 	</div>
 	<div id="CMSBSection">
 		<div id="xToolbar" style="min-height:100px">&nbsp;</div>

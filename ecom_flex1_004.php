@@ -237,7 +237,7 @@ if(!$ecom_flex1_settings){
 }
 
 //notice this is declared outside the above logic as p3 may not be present as the first product shown
-//p3 settings - see http://dev.compasspointmedia.com/mediawiki/index.php/Protocol:Packaged_Product_Protocol
+//p3 settings - see http://dev.compasspoint-sw.com/mediawiki/index.php/Protocol:Packaged_Product_Protocol
 if(!isset($hidePackageWording))$hidePackageWording=false; //allow for "Special Package" wording at top
 if(!isset($packageHeading))$packageHeading='Featured in this package';
 
