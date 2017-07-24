@@ -1,5 +1,7 @@
 <?php
-if(!$cnxKey)$cnxKey=$MASTER_DATABASE;
+// 2017-07-24 SF Migrate everything to acct variable, avoid database username or password
+if(empty($cnxKey)) $cnxKey=(isset($acct) ? $acct : $MASTER_USERNAME);
+
 $hideMembershipDirectoryLink = $hideEventCalendarLink = $hideContactUsLink = $hideSiteMapLink = true;
 
 if(!$suppressSessionStart){
