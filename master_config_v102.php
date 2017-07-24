@@ -232,7 +232,7 @@ require($FUNCTION_ROOT.'/function_stats_collection_v120.php');
 if(!function_exists('sql_autoinc_text'))
 require($FUNCTION_ROOT.'/function_sql_autoinc_text_v232.php');
 if(!function_exists('subkey_sort'))
-require($FUNCTION_ROOT.'/function_array_subkey_sort_v203.php');
+require($FUNCTION_ROOT.'/function_array_subkey_sort_v300.php');
 if(!function_exists('mysql_declare_table_rtcs'))
 require($FUNCTION_ROOT.'/function_mysql_declare_table_rtcs_v200.php');
 if(!function_exists('tree_functions'))
@@ -298,7 +298,7 @@ require($FUNCTION_ROOT.'/group_text_functions_v100.php');
 if(!function_exists('array_alter_table'))
 require($FUNCTION_ROOT.'/function_array_alter_table_v100.php');
 if(!function_exists('subkey_sort'))
-require($FUNCTION_ROOT.'/function_array_subkey_sort_v203.php');
+require($FUNCTION_ROOT.'/function_array_subkey_sort_v300.php');
 
 //function settings
 $MASTER_PASSWORD=generic5t($MASTER_PASSWORD,'decode', array('super'=>1));

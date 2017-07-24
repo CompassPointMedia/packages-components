@@ -277,7 +277,7 @@ foreach($availableCols[$datasetGroup][$modApType][$modApHandle]['scheme'] as $n=
 }
 
 #4 sort by column order
-if(!function_exists('subkey_sort'))require($FUNCTION_ROOT.'/function_array_subkey_sort_v100.php');
+if(!function_exists('subkey_sort'))require($FUNCTION_ROOT.'/function_array_subkey_sort_v300.php');
 $availableCols[$datasetGroup][$modApType][$modApHandle]['scheme']=subkey_sort($availableCols[$datasetGroup][$modApType][$modApHandle]['scheme'],'colposition');
 
 if(!$sort){

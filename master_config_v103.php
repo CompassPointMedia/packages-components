@@ -288,7 +288,7 @@ $EMAIL_ROOT=			$_SERVER['DOCUMENT_ROOT'].'/emails';
 foreach( [
     'function_array_alter_table_v100',
     'function_array_merge_accurate_v100',
-    'function_array_subkey_sort_v203',
+    'function_array_subkey_sort_v300',
     'function_array_transpose',
     'function_attach_download_v100',
     'function_callback_v101',
