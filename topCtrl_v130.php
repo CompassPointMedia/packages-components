@@ -127,7 +127,7 @@ if($topCtrlRewrite)ob_start();
 				//---------------------- begin link ------------------------
 				ob_start(); 
 				?>
-				Welcome <a title="View and edit your client information" href="<?php echo $topCtrlSwitchboardURL?>"><?php echo $_SESSION['cnx'][$MASTER_DATABASE]['firstName']. ' ' . $_SESSION['cnx'][$MASTER_DATABASE]['lastName']?></a>
+				Welcome <a title="View and edit your client information" href="<?php echo $topCtrlSwitchboardURL?>"><?php echo $_SESSION['cnx'][$acct]['firstName']. ' ' . $_SESSION['cnx'][$acct]['lastName']?></a>
 				<?php
 				$n=ob_get_contents();
 				ob_end_clean();

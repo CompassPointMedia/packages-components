@@ -29,7 +29,7 @@ switch($mode){
 
 		/* 2009-01-08: added the login feature */
 		if($logout){
-			unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+			unset($_SESSION['special'][$acct]['adminMode']);
 			?><div id="loginSection">
 				<h3>CMSB Editor Sign-in</h3>
 				<input name="UN" type="text" id="UN" /><br />
@@ -45,7 +45,7 @@ switch($mode){
 			</script><?php
 		}else if(isset($UN)){
 			if(strlen($UN) && strlen($PW) && strtolower($UN)==strtolower($MASTER_USERNAME) && stripslashes($PW)==$MASTER_PASSWORD){
-				$_SESSION['special'][$MASTER_DATABASE]['adminMode']=1;
+				$_SESSION['special'][$acct]['adminMode']=1;
 				?><script language="javascript" type="text/javascript">
 				window.parent.g('loginSection').innerHTML='';
 				window.parent.g('loginSection').style.display='none';
@@ -64,7 +64,7 @@ switch($mode){
 }
 
 if($logout=='1'){
-	unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+	unset($_SESSION['special'][$acct]['adminMode']);
 	header('Location: '.stripslashes($src));
 	?>
 	redirecting..
@@ -73,7 +73,7 @@ if($logout=='1'){
 	</script><?php
 	exit;
 }else if($UN==$MASTER_USERNAME && $PW==$MASTER_PASSWORD){
-	$_SESSION['special'][$MASTER_DATABASE]['adminMode']=1;
+	$_SESSION['special'][$acct]['adminMode']=1;
 	$location=($src ? stripslashes($src) : '/');
 	header('Location: '.$location);
 	?><script>window.location='<?php echo $location?>'</script><?php

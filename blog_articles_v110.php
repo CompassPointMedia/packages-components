@@ -42,7 +42,7 @@ if(!$blogListReturnPage)$blogListReturnPage=($return ? $return : 'articles.php')
 if(!isset($blogHideCSS))$blogHideCSS=true; //css here for reference only
 
 //basic login credentials
-if($_SESSION['cnx'][$MASTER_DATABASE]['primaryKeyValue']){
+if($_SESSION['cnx'][$acct]['primaryKeyValue']){
 	$blogLoggedIn=1;
 }else{
 	$blogLoggedIn=0;
@@ -309,7 +309,7 @@ if($blogComponent=='list'){
 }else{
 	$data = q("SELECT * FROM cms1_articles WHERE ID='$Articles_ID'", O_ROW);
 	extract($data);
-	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE])){
+	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct])){
 		echo $blogPrivateGroupText ?>
 		To sign in, <a href="/cgi/login.php?src=<?php echo urlencode('../'.$thispage.'?'.$_SERVER['QUERY_STRING']);?>">click here</a>.  <br />
 		<?php	
@@ -325,7 +325,7 @@ if($blogComponent=='list'){
 		
 		?>
 		<h3><?php 
-		if($_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+		if($_SESSION['special'][$acct]['adminMode']){
 			?>
 		  <input type="button" name="Submit" value="Edit this article.." onClick="return ow('../console/focus_articles.php?ID=<?php echo $_GET['Articles_ID']?>','l0_articles','600,600');"/>
 		  &nbsp;&nbsp;

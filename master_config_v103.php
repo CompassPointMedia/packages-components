@@ -249,19 +249,19 @@ define('ADMIN_MODE_DESIGNER',2);
 define('ADMIN_MODE_GOD',256);
 
 if(isset($adminMode) && $adminMode==='0'){
-	unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+	unset($_SESSION['special'][$acct]['adminMode']);
 	$adminMode=false;
-}else if(!empty($_SESSION['special'][$MASTER_DATABASE]['adminMode'])){
-    $n = $_SESSION['special'][$MASTER_DATABASE]['adminMode'];
+}else if(!empty($_SESSION['special'][$acct]['adminMode'])){
+    $n = $_SESSION['special'][$acct]['adminMode'];
 	if(isset($setAdminMode)){
 		/*
 		2011-07-18
 		from now on adminMode=1 means editorMode, adminMode=2 means designerMode
 		*/
 		if($_GET['setAdminMode']){
-			$_SESSION['special'][$MASTER_DATABASE]['adminMode']=$adminMode=$_GET['setAdminMode'];
+			$_SESSION['special'][$acct]['adminMode']=$adminMode=$_GET['setAdminMode'];
 		}else{
-			unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+			unset($_SESSION['special'][$acct]['adminMode']);
 			$adminMode=false;
 		}
 	}else{

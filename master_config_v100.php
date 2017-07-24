@@ -138,9 +138,9 @@ if(preg_match('/^Mozilla\/4/i',$_SERVER['HTTP_USER_AGENT'])){
 
 //session.special.[account name].adminMode is set separately
 if(isset($adminMode) && $adminMode==='0'){
-	unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+	unset($_SESSION['special'][$acct]['adminMode']);
 	$adminMode=false;
-}else if($_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+}else if($_SESSION['special'][$acct]['adminMode']){
 	$adminMode=true;
 }else{
 	$adminMode=false;

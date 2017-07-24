@@ -255,7 +255,7 @@ if(!$refreshComponentOnly){
 				?><div id="blog<?php echo $ID?>" class="blogEntry">
 					<?php
 					$OwnerContacts_ID=q("SELECT Contacts_ID FROM cms1_articles WHERE ID='".$_REQUEST['ID']."'", O_VALUE);
-					if($_SESSION['cnx'][$MASTER_DATABASE]['primaryKeyValue']==$OwnerContacts_ID){
+					if($_SESSION['cnx'][$acct]['primaryKeyValue']==$OwnerContacts_ID){
 						?><div class="blogCtrls">
 						[<a href="index_01_exe.php?mode=deleteBlog&Articles_ID=<?php echo $_REQUEST['ID']?>&ID=<?php echo $$IDField?>" target="w2">delete</a>] 
 						<?php

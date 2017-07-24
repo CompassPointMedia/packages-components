@@ -249,7 +249,7 @@ if(!$refreshComponentOnly){
 					<?php
 					$OwnerContacts_ID=q("SELECT Contacts_ID FROM $blogReferenceTable WHERE ID='".$GLOBALS[$blogKeyField]."'", O_VALUE);
 					?><div class="blogCtrls"><?php
-					if($_SESSION['cnx'][$MASTER_DATABASE]['primaryKeyValue']==$OwnerContacts_ID){
+					if($_SESSION['cnx'][$acct]['primaryKeyValue']==$OwnerContacts_ID){
 						?>
 						[<a href="index_01_exe.php?mode=deleteBlog&Articles_ID=<?php echo $GLOBALS[$blogKeyField]?>&ID=<?php echo $$IDField?>" target="w2">delete</a>] 
 						<?php

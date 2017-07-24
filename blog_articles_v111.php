@@ -61,7 +61,7 @@ if(!isset($blogFocusMethod))$blogFocusMethod=BLOG_FOCUS_ALWAYS;
 if(!$blogListReturnPage)$blogListReturnPage=($return ? $return : 'articles.php');
 if(!isset($blogHideCSS))$blogHideCSS=true; //css here for reference only
 if(!$blogContinueReadingText)$blogContinueReadingText='[Continue Reading]';
-if(!isset($blogMemberGroupText))$blogMemberGroupText=$companyName;//Search $Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE] to see how to implement 
+if(!isset($blogMemberGroupText))$blogMemberGroupText=$companyName;//Search $Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct] to see how to implement
 if(!isset($blogPrivateGroupText))$blogPrivateGroupText='This article is a premium resource available to '.$blogMemberGroupText.' members only.<br />';
 //order that article summary pieces (spots) are presented in
 if(!isset($blogSpotOrder))$blogSpotOrder=array(
@@ -87,7 +87,7 @@ if(!function_exists('strip_attributes')){
 
 
 //basic login credentials
-if($_SESSION['cnx'][$MASTER_DATABASE]['primaryKeyValue']){
+if($_SESSION['cnx'][$acct]['primaryKeyValue']){
 	$blogLoggedIn=1;
 }else{
 	$blogLoggedIn=0;
@@ -477,7 +477,7 @@ if($blogComponent=='list'){
 }else{
 	$data = q("SELECT * FROM cms1_articles WHERE ID='$Articles_ID'", O_ROW);
 	extract($data);
-	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE])){
+	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct])){
 		echo $blogPrivateGroupText ?>
 		To sign in, <a href="/cgi/login.php?src=<?php echo urlencode('../'.$thispage.'?'.$_SERVER['QUERY_STRING']);?>">click here</a>.  <br />
 		<?php	
@@ -501,7 +501,7 @@ if($blogComponent=='list'){
 		}else{
 			?><h3><?php 
 		}
-		if($_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+		if($_SESSION['special'][$acct]['adminMode']){
 			?>
 		  	<input type="button" name="Submit" value="Edit this article.." onClick="return ow('../console/focus_articles.php?ID=<?php echo 	$Articles_ID;?>','l0_articles','600,600')"/>
 			<?php

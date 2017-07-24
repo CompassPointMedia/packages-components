@@ -52,7 +52,7 @@ if(!isset($blogFocusMethod))$blogFocusMethod=BLOG_FOCUS_ALWAYS;
 if(!$blogListReturnPage)$blogListReturnPage=($return ? $return : 'articles.php');
 if(!isset($blogHideCSS))$blogHideCSS=true; //css here for reference only
 if(!$blogContinueReadingText)$blogContinueReadingText='[Continue Reading]';
-if(!isset($blogMemberGroupText))$blogMemberGroupText=$companyName;//Search $Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE] to see how to implement 
+if(!isset($blogMemberGroupText))$blogMemberGroupText=$companyName;//Search $Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct] to see how to implement
 if(!isset($blogPrivateGroupText))$blogPrivateGroupText='This article is a premium resource available to '.$blogMemberGroupText.' members only.<br />';
 
 if(!isset($blogDisplayWhenPrivate))$blogDisplayWhenPrivate=array(''=>true,'','','','');
@@ -80,7 +80,7 @@ if(!function_exists('strip_attributes')){
 }
 
 //basic login credentials
-if($_SESSION['cnx'][$MASTER_DATABASE]['primaryKeyValue']){
+if($_SESSION['cnx'][$acct]['primaryKeyValue']){
 	$blogLoggedIn=1;
 }else{
 	$blogLoggedIn=0;
@@ -469,7 +469,7 @@ if($blogComponent=='list'){
 		mail($developerEmail, 'SEE NOTE IN EMAIL!! User viewing articles in list view with no articles present, file '.__FILE__.', line '.__LINE__,get_globals('develop where the paragraph below this specifies settings to a person in adminMode, with a link to the console to create an article OF THAT TYPE'),$fromHdrBugs);
 		?><p>Currently no articles are listed</p>
 		<?php
-		if($_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+		if($_SESSION['special'][$acct]['adminMode']){
 			?><p>
 			<a href="/console/list_articles.php">Click here to view articles in the console</a><br />
 			<a href="/console/focus_articles.php">Click here to create a new article</a><br />
@@ -483,7 +483,7 @@ if($blogComponent=='list'){
 	extract($data);
 
 	ob_start(); //---------------- master buffer for article -----------------
-	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE])){
+	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct])){
 		echo $blogPrivateGroupText ?>
 		To sign in, <a href="/cgi/login.php?src=<?php echo urlencode('../'.$thispage.'?'.$_SERVER['QUERY_STRING']);?>">click here</a>.  <br />
 		<?php	
@@ -495,7 +495,7 @@ if($blogComponent=='list'){
 		?>
 		<h3><?php echo $data['Title']?>
 		<?php 
-		if($_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+		if($_SESSION['special'][$acct]['adminMode']){
 			?> <a title="Edit this article" href="/console/focus_articles.php?ID=<?php echo $ID?>" onclick="return ow(this.href,'l1_articles','700,700');"><img src="/images/i/plusminus-plus.gif" alt="edit" /></a>&nbsp;<?php
 		}
 		?></h3>
@@ -561,7 +561,7 @@ if($blogComponent=='list'){
 	}
 	$standardOutput=ob_get_contents();
 	ob_end_clean();
-	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$MASTER_DATABASE])){
+	if($Private && !($_SESSION['identity'] && $_SESSION['cnx'][$acct])){
 		foreach ($blogDisplayWhenPrivate as $v){
 			echo $v;
 		}

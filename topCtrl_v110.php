@@ -63,7 +63,7 @@ if(!isset($topCtrlCartImage))$topCtrlCartImage="/images/i/cart-hamoni.gif";
 
 				//they are signed in
 				?>
-				<li class="tctrlAcctLink">Welcome <a title="View and edit your client information" href="<?php echo $topCtrlSwitchboardURL?>"><?php echo $_SESSION['cnx'][$MASTER_DATABASE]['firstName']. ' ' . $_SESSION['cnx'][$MASTER_DATABASE]['lastName']?></a></li>
+				<li class="tctrlAcctLink">Welcome <a title="View and edit your client information" href="<?php echo $topCtrlSwitchboardURL?>"><?php echo $_SESSION['cnx'][$acct]['firstName']. ' ' . $_SESSION['cnx'][$acct]['lastName']?></a></li>
 				<li class="tctrlSignOutLink"><a href="/cgi/login.php?logout=1&src=<?php echo $return?>" title="sign out"><?php echo $topCtrlLabelSignOut?></a>
 				</li>
 				<?php

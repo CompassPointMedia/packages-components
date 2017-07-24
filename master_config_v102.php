@@ -171,15 +171,15 @@ if(preg_match('/^Mozilla\/4/i',$_SERVER['HTTP_USER_AGENT'])){
 define('ADMIN_MODE_EDITOR',1);
 define('ADMIN_MODE_DESIGNER',2);
 if(isset($adminMode) && $adminMode==='0'){
-	unset($_SESSION['special'][$MASTER_DATABASE]['adminMode']);
+	unset($_SESSION['special'][$acct]['adminMode']);
 	$adminMode=false;
-}else if($n=$_SESSION['special'][$MASTER_DATABASE]['adminMode']){
+}else if($n=$_SESSION['special'][$acct]['adminMode']){
 	if($setAdminMode){
 		/*
 		2011-07-18
 		from now on adminMode=1 means editorMode, adminMode=2 means designerMode
 		*/
-		$_SESSION['special'][$MASTER_DATABASE]['adminMode']=$adminMode=$setAdminMode;
+		$_SESSION['special'][$acct]['adminMode']=$adminMode=$setAdminMode;
 	}
 	$adminMode=$n;
 }else{
