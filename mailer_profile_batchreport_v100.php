@@ -44,9 +44,9 @@ $listMethod=array(
 
 
 ?>
-  Recipient List Method: <?php echo $listMethod[$RecipientMethod]?><br />
+  Recipient List Method: <?php echo $listMethod[$RecipientSource]?><br />
 <?php
-switch($RecipientMethod){
+switch($RecipientSource){
 	case 'manual':
 		//nothing needed
 

@@ -3,12 +3,12 @@
 sample form post
 Array
 (
-    [RecipientMethod] => import
+    [RecipientSource] => import
     [Views_ID] => 
     [ViewEmialColumns] => 
     [OverrideViewFilters] => 
     [ComplexQuery] => 
-    [recipientMethods_status] => import
+    [recipientSources_status] => import
     [ManualList] => 
     [ImportType] => csv
     [EmailColumns] => Column 1
@@ -39,7 +39,7 @@ NOTE: these variables were used for including that we had composition in a separ
 prn($_SESSION['mail'][$acct]['templates'][$ID]);
 
 //first we do the work of determining recipient data source, max line, record count, etc.
-switch($RecipientMethod){
+switch($RecipientSource){
 	case 'group':
 		unset($ids, $groups);
 		$ids=array();
@@ -150,7 +150,7 @@ if($BatchRecord || $BatchRecordEmail){
 	$receipt=date('y-m-d h:i ').$seq.'-'.$acct;
 	
 	//depending on method, we set null values
-	$iComplexQuery=($RecipientMethod=='complex' ? "'".$ComplexQuery."'" : 'NULL');
+	$iComplexQuery=($RecipientSource=='complex' ? "'".$ComplexQuery."'" : 'NULL');
 	//get file name
 	if($Composition=="template" && $TemplateMethod=="file" && $Files_ID){
 		$a=q("SELECT FROM relatebase_files WHERE Files_ID='$Files_ID'", O_ROW);
@@ -236,7 +236,7 @@ $i=0;
 $j=0;
 $sendCount=0;
 
-while($rd=get_recipient_data_row($RecipientMethod)){
+while($rd=get_recipient_data_row($RecipientSource)){
 	$i++;
 	//we allow max 20 seconds per iteration or something is wrong
 	set_time_limit(20);
@@ -253,10 +253,10 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 			$fieldList[strtolower(preg_replace('/[^a-z0-9_]+/i','',$n))]=array($k,$n);
 			$k++;
 		}
-		if($RecipientMethod=='complex'){
+		if($RecipientSource=='complex'){
 			//not sure what action is required
 		
-		}else if($RecipientMethod=='import' && $ImportHeaders){
+		}else if($RecipientSource=='import' && $ImportHeaders){
 			//need to translate the array emailCols to text header names
 			foreach($_emailColumns as $v){
 				$ec2[]=$headers[$v];
@@ -264,8 +264,8 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 			unset($_emailColumns);
 			$_emailColumns=$ec2;
 			//we skip the header row
-			//if($RecipientMethod!=='complex')continue;
-		}else if($RecipientMethod=='manual'){
+			//if($RecipientSource!=='complex')continue;
+		}else if($RecipientSource=='manual'){
 			$_emailColumns[]=0;
 		}
 	}
@@ -273,7 +273,7 @@ while($rd=get_recipient_data_row($RecipientMethod)){
 	$emails=array();
 	foreach($_emailColumns as $v){
 		//the function converts a header like First Name to FirstName
-		if($RecipientMethod=='complex'){
+		if($RecipientSource=='complex'){
 			foreach($fieldList as $o=>$w){
 				if($w[0]==$v-1)$key=$w[1];
 			}
