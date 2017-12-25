@@ -161,21 +161,21 @@ if($BatchRecord || $BatchRecordEmail){
 	//insert the batch record - but there's something later about batch recovery where this may be embedded in if/else
 	$Batches_ID=q("INSERT INTO relatebase_content_batches SET
 	ContentObject='relatebase_mail_profiles',
-	ContentKey�= ".($ID==0?"NULL":$ID).",
-	BatchNumber�= '$receipt',
-	FromName�= '$FromName',
-	FromEmail�= '$FromEmail',
-	ReplyToName�= '$ReplyToName',
-	ReplyToEmail�= '$ReplyToEmail',
-	BounceName�= '$BounceName',
-	BounceEmail�= '$BounceEmail',
-	Importance�= '$Importance',
-	AttachedVCard�= '$AttachVCard',
-	ReturnReceipt�= '$ReturnReceipt',
+	ContentKey = ".($ID==0?"NULL":$ID).",
+	BatchNumber = '$receipt',
+	FromName = '$FromName',
+	FromEmail = '$FromEmail',
+	ReplyToName = '$ReplyToName',
+	ReplyToEmail = '$ReplyToEmail',
+	BounceName = '$BounceName',
+	BounceEmail = '$BounceEmail',
+	Importance = '$Importance',
+	AttachedVCard = '$AttachVCard',
+	ReturnReceipt = '$ReturnReceipt',
 	StartTime = NOW(), /** stop time to be entered later **/
-	BatchNotes�= '$BatchRecordComment',
-	CreateDate�= NOW(),
-	Creator�= '$acct'", O_INSERTID);
+	BatchNotes = '$BatchRecordComment',
+	CreateDate = NOW(),
+	Creator = '$acct'", O_INSERTID);
 	prn($qr);
 	
 	//last usage time in session and db
