@@ -156,27 +156,29 @@ switch($RecipientSource){
 			$err[1]['Complex']='You have not selected which column(s) of your query contain an email address.  Click Select Email Column(s).., look for the column(s) containing an email address, and check the box for the column number.  Then click Use Selected Columns';
 			break;
 		}
-		ob_start();
-		$result=q(stripslashes($_POST[ComplexQuery]), ERR_ECHO);
+        ob_start();
+		$result=q(stripslashes($_POST['ComplexQuery']), ERR_ECHO);
 		$errOut=ob_get_contents();
 		ob_end_clean();
-		
-		if($errOut){
+
+        if($errOut){
 			errLevel(1);
 			$err[1]['Complex']='Your query returned an error ('. mysqli_errno().'\n\nThis is the text of the error:\n'. addslashes(mysqli_error());
 			break;
 		}
-		if(!mysqli_num_rows($result)){
+
+        if(!mysqli_num_rows($result)){
 			errLevel(1);
 			$err[1]['Complex']='Your query did not return any records.  The mailer must have at least one record with a valid email column to work';
 			break;
 		}else{
 			//used for required fields check below
 			$checkColumns=mysqli_fetch_array($result,MYSQLI_ASSOC);
-			mysql_data_seek($result, 0);
+			mysqli_data_seek($result, 0);
 		}
-		//2004-09-28 handle required columns
-		if(trim($_SESSION['mail'][$acct]['templates'][$ID]['advanced'][RequiredFields])){
+
+        //2004-09-28 handle required columns
+		if(trim($_SESSION['mail'][$acct]['templates'][$ID]['advanced']['RequiredFields'])){
 			//make sure Required columns are present
 			$r=$checkColumns;
 			//we presume at this point that there are columns present
@@ -190,7 +192,7 @@ switch($RecipientSource){
 				}
 			}
 			//required fields
-			$q=explode(',',$_SESSION['mail'][$acct]['templates'][$ID]['advanced'][RequiredFields]);
+			$q=explode(',',$_SESSION['mail'][$acct]['templates'][$ID]['advanced']['RequiredFields']);
 			foreach($q as $n=>$v){
 				if(trim($v)){
 					if(!in_array(trim(strtolower($v)), $allFields)){
@@ -221,10 +223,8 @@ switch($RecipientSource){
 		$err[1]['Complex']='The email column(s) you selected don\'t contain valid email addresses!  Click Select Email Column(s).., look for the column(s) containing an email address, and check the box for the column number.  Then click Use Selected Columns';
 	break;
 	default:
-	    /*
 		errLevel(2);
 		$err[2]['RecipientSource']='You have not selected any recipients.  Click the Select Recipients tab, and select a method.  If you need further assistance click the Help tab.';
-	    */
 	break;
 }
 //------------ SECTION TWO: Composition and correctness of the email
