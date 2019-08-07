@@ -311,7 +311,7 @@ foreach( [
     'function_parse_query_v200',
     'function_pk_encode_decode',
     'function_prn',
-    'function_q_v130',
+    'function_q_v140',
     'function_quasi_resource_generic_v201',
     'function_rb_vars_v120',
     'function_relatebase_dataobjects_settings_v100',
@@ -333,7 +333,6 @@ foreach( [
 }
 
 //function settings
-if(!$overrideGeneric5tDecoding)$MASTER_PASSWORD=generic5t($MASTER_PASSWORD,'decode', array('super'=>1));
 if(!$qx['defCnxMethod'])$qx['defCnxMethod']=C_MASTER;
 if(!isset($enhanced_mail['logmail']))$enhanced_mail['logmail']=true; //implement maillog by default
 

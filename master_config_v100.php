@@ -199,8 +199,6 @@ if(!$suppressFunctionFiles){
 	require($FUNCTION_ROOT.'/function_get_contents_v100.php');
 	if(!function_exists('shopping_cart'))
 	require($FUNCTION_ROOT.'/function_shopping_cart_v400.php');
-	if(!function_exists('generic5t'))
-	require($FUNCTION_ROOT.'/function_generic5t_v100.php');
 	if(!function_exists('q'))
 	require($FUNCTION_ROOT.'/function_q_v130.php');
 	if(!function_exists('prn'))
@@ -256,13 +254,6 @@ if(!$suppressFunctionFiles){
 	if(!function_exists('subkey_sort'))
 	require($FUNCTION_ROOT.'/function_array_subkey_sort_v300.php');
 }
-if(!$printMasterPassword){
-	$printMasterPassword=0;
-}
-if($printMasterPassword>1){
-	echo $MASTER_PASSWORD=generic5t($MASTER_PASSWORD,'encode', array('super'=>1));
-}	
-$MASTER_PASSWORD=generic5t($MASTER_PASSWORD,'decode', array('super'=>1));
 
 
 //function settings
