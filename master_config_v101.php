@@ -199,7 +199,7 @@ if(!$suppressFunctionFiles){
 	if(!function_exists('prn'))
 	require($FUNCTION_ROOT.'/function_prn.php');
 	if(!function_exists('q'))
-	require($FUNCTION_ROOT.'/function_q_v130.php');
+	require($FUNCTION_ROOT.'/function_q_v140.php');
 	if(!function_exists('t'))
 	require($FUNCTION_ROOT.'/function_t_v111.php');
 	if(!function_exists('site_track'))
@@ -223,7 +223,7 @@ if(!$suppressFunctionFiles){
 	if(!function_exists('shopping_cart'))
 	require($FUNCTION_ROOT.'/function_shopping_cart_v400.php');
 	if(!function_exists('q'))
-	require($FUNCTION_ROOT.'/function_q_v130.php');
+	require($FUNCTION_ROOT.'/function_q_v140.php');
 	if(!function_exists('prn'))
 	require($FUNCTION_ROOT.'/function_prn.php');
 	if(!function_exists('xml_read_tags'))
