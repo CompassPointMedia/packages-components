@@ -422,8 +422,8 @@ if(empty($_REQUEST['suppressSessionStart'])){
 	$sessionid ? '' : $sessionid = session_id();
 	ob_end_clean();
 }
-
-if(!empty($_REQUEST['mode'])){
+// Note: conflict between Juliet for submissions to index_01_exe.php - mode calls to root page(s) assume things related to session and shopping cart
+if(!empty($_REQUEST['mode']) && !in_array($_SERVER['REQUEST_URI'], [ '/index_01_exe.php', '/_juliet_.editor.php', '/_juliet_.posts.php', '_juliet_.settings.php', '/cms3.11.php' ])){
     $mode = $_REQUEST['mode'];
     if($mode == 'retrieveSession'){
         //2010-06-25: added for relatebase.com shopping cart (v3.00) to pull shopping cart remotely.  Note this will now work even if we're on a different physical server.  PHPSuExec makes it impossible to pass session variables from site to site
