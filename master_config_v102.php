@@ -315,7 +315,7 @@ if(!$adminEmail)		$adminEmail=$siteRootEmailAccount.'@'.$siteDomain;
 //location of shopping cart
 /*
 Moved to config.php
-$shoppingCartURL = 'https://www.relatebase.com/c/cart/en/v410/index.php?sessionid='.($sessionid ? $sessionid : $GLOBALS['PHPSESSID']).'&acct='.$cartAcct.'&mid='.$mid;*/
+$shoppingCartURL = 'https://www.relatebase.com/c/cart/en/v410/index.php?sessionid='.($sessionid ? $sessionid : $GLOBALS['PHPSESSID']).'&acct='.$cartAcct.'&mid='.$cartModuleId;*/
 
 
 if(!function_exists('broken_integrity')){

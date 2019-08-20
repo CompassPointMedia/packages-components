@@ -347,7 +347,6 @@ function tabs(n){
 <script language="JavaScript" type="text/javascript">
 var thispage='<?php echo $thispage?>';
 var thisfolder='<?php echo $thisfolder?>';
-var browser='<?php echo $browser?>';
 var ctime='<?php echo $ctime?>';
 var PHPSESSID='<?php echo $PHPSESSID?>';
 //for nav feature

@@ -33,22 +33,22 @@ CSS:
 //settings
 if(!isset($topCtrlImplementSearch))$topCtrlImplementSearch=true;
 if(!isset($topCtrlImplementShoppingCartLink))$topCtrlImplementShoppingCartLink=false;
-if(!$topCtrlSearchLabel)$topCtrlSearchLabel='Quick Search:';
-if(!$topCtrlLabelSignOut)$topCtrlLabelSignOut='Sign out';
+if(empty($topCtrlSearchLabel))$topCtrlSearchLabel='Quick Search:';
+if(empty($topCtrlLabelSignOut))$topCtrlLabelSignOut='Sign out';
 if(!$topCtrlLabelSignIn)$topCtrlLabelSignIn='Sign in';
 if(!isset($topCtrlLabelYourOrder))$topCtrlLabelYourOrder='Your order';
-if(!$topCtrlLabelNewAccount)$topCtrlLabelNewAccount='New account';
-if(!$topCtrlLabelOrderLink)$topCtrlLabelOrderLink='Your Order';
-if(!$topCtrlLabelSearchURL)$topCtrlLabelSearchURL='search-page.php';
-if(!$topCtrlLabelSearchButton)$topCtrlLabelSearchButton='GO';
-if(!$topCtrlSwitchboardURL)$topCtrlSwitchboardURL="/cgi/switchboard";
-if(!$topCtrlNewAccountURL)$topCtrlNewAccountURL="/cgi/usemod";
-if(!$topCtrlLoginURL)$topCtrlLoginURL="/cgi/login";
-if(!isset($topCtrlCartImage))$topCtrlCartImage="/images/i/findicons.com-shoppingcart01.png";
+if(empty($topCtrlLabelNewAccount))$topCtrlLabelNewAccount='New account';
+if(empty($topCtrlLabelOrderLink))$topCtrlLabelOrderLink='Your Order';
+if(empty($topCtrlLabelSearchURL))$topCtrlLabelSearchURL='search-page.php';
+if(empty($topCtrlLabelSearchButton))$topCtrlLabelSearchButton='GO';
+if(empty($topCtrlSwitchboardURL))$topCtrlSwitchboardURL="/cgi/switchboard";
+if(empty($topCtrlNewAccountURL))$topCtrlNewAccountURL="/cgi/usemod";
+if(empty($topCtrlLoginURL)) $topCtrlLoginURL="/cgi/login";
+if(empty($topCtrlCartImage))$topCtrlCartImage="/images/i/findicons.com-shoppingcart01.png";
 //topCtrlHideNewAccountOption - default false
 
 if($topCtrlRewrite)ob_start();
-if(!$refreshComponentOnly){
+if(empty($refreshComponentOnly)){
 	ob_start();?>
 	<style type="text/css">
 	ul.topCtrlListLinks{
@@ -118,18 +118,18 @@ if(!$refreshComponentOnly){
 			</li>
 			<?php }?>
 			<?php
-			if($topCtrlFixedSigninReturn){
-				$return=$topCtrlFixedSigninReturn;
+			if(!empty($topCtrlFixedSigninReturn)){
+				$return = $topCtrlFixedSigninReturn;
 			}else{
 				$qs=explode('?',$_SERVER['REQUEST_URI']);
-				$qs=($qs[1]?$qs[1]:'');
+				$qs=(!empty($qs[1]) ? $qs[1] : '');
 				if($thispage=='login' || $thispage=='login.php'){
 					$return=$src;
 				}else{
-					$return=urlencode('/'.($thisfolder?$thisfolder.'/':'').($thissubfolder?$thissubfolder.'/':'').($thispage=='index'?'':$thispage) . ($qs ? '?' . $qs : ''));
+					$return = urlencode('/'.( $thisfolder ? $thisfolder . '/' : '').(!empty($thissubfolder) ? $thissubfolder . '/' : '').($thispage == 'index' ? '' : $thispage) . (!empty($qs) ? '?' . $qs : ''));
 				}
 			}
-			if($_SESSION['cnx'][$cnxKey]){ 
+			if(!empty($_SESSION['cnx'][$cnxKey])){
 
 				//they are signed in
 				?>
@@ -177,7 +177,7 @@ if(!$refreshComponentOnly){
 				//----------------------- end link -------------------------
 				?>				
 				</li>
-				<?php if(!$topCtrlHideNewAccountOption){ ?>
+				<?php if(empty($topCtrlHideNewAccountOption)){ ?>
 				<li class="topCtrlNewAcctLink">
 				<?php
 				//---------------------- begin link ------------------------
@@ -194,7 +194,7 @@ if(!$refreshComponentOnly){
 				<?php } ?>
 				<?php
 			}
-			if($topCtrlRSSFeedURL){
+			if(!empty($topCtrlRSSFeedURL)){
 				?><li><?php
 				//---------------------- begin link ------------------------
 				ob_start(); 
@@ -205,7 +205,7 @@ if(!$refreshComponentOnly){
 				//----------------------- end link -------------------------
 				?></li><?php
 			}
-			if(is_array($topCtrlCustomLinks)){
+			if(!empty($topCtrlCustomLinks)){
 				foreach($topCtrlCustomLinks as $n=>$v){
 					?><li><?php
 					echo $v['leftspacer'];
