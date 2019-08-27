@@ -358,7 +358,7 @@ foreach( [
              'function_image_dims_v100',
              'function_is_logical_v100',
              'function_js_email_encryptor_v100',
-             'function_metatags_i1_v101',
+             'function_metatags_i1_v102',
              'function_mm_v110',
              'function_mysql_declare_field_attributes_rtcs_v100',
              'function_mysql_declare_table_rtcs_v200',
