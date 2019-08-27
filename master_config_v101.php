@@ -146,15 +146,6 @@ if(!$_SESSION['systemUserName'] && $_SERVER['PHP_AUTH_USER']){
 	$_SESSION['systemUserName']=$_SERVER['PHP_AUTH_USER'];
 }
 
-//browser detect
-if(preg_match('/^Mozilla\/4/i',$_SERVER['HTTP_USER_AGENT'])){
-	$browser='IE';
-}else if(preg_match('/^Mozilla\/5/i',$_SERVER['HTTP_USER_AGENT'])){
-	$browser='Moz';
-}else if(!stristr($_SERVER['HTTP_USER_AGENT'],'Gigabot') && !stristr($_SERVER['HTTP_USER_AGENT'],'msnbot')){
-	$browserUnknown=true;
-	$browser='Moz'; #assume
-}
 
 //session.special.[account name].adminMode is set separately
 if(isset($adminMode) && $adminMode==='0'){

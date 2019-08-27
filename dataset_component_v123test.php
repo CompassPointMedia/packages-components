@@ -424,7 +424,7 @@ ob_start();
 		if(!$hideComponentTfoot)echo $componentTfoot;
 		ob_start(); //--- buffer tbody ---
 		?>
-		<tbody id="<?php echo $datasetComponent?>_tbody" <?php if($browser!=='IE' && $scrollableTbodyRegion){?> style="overflow-y:scroll;overflow-x:hidden;height:350px;" <?php } ?>>
+		<tbody id="<?php echo $datasetComponent?>_tbody" <?php if($scrollableTbodyRegion){?> style="overflow-y:scroll;overflow-x:hidden;height:350px;" <?php } ?>>
 		<?php
 		@reset($records);
 		if($records){
