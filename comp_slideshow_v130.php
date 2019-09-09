@@ -86,16 +86,6 @@ if(!function_exists('get_contents')){
 		}
 	}
 }
-if(!$browser){
-	if(preg_match('/^Mozilla\/4/i',$_SERVER['HTTP_USER_AGENT'])){
-		$browser='IE';
-	}else if(preg_match('/^Mozilla\/5/i',$_SERVER['HTTP_USER_AGENT'])){
-		$browser='Moz';
-	}else if(!stristr($_SERVER['HTTP_USER_AGENT'],'Gigabot') && !stristr($_SERVER['HTTP_USER_AGENT'],'msnbot')){
-		#mail($technicalEmail,'Unknown browser type',$_SERVER['HTTP_USER_AGENT'],$fromHdrBugs);
-		$browser='Moz'; #assume
-	}
-}
 
 
 
@@ -293,10 +283,10 @@ if(count($ssPictures)){
 					please wait while the slideshow loads..
 				</span>
 				<?php echo $ssWait=get_contents();?>
-				<div id="ly2" <?php echo 'style="'. ($browser=='IE'? 'filter:alpha(opacity=0);' : '-moz-opacity:0.0;') . '"';?>>
+				<div id="ly2" <?php echo 'style="opacity: 0.0;"';?>>
 					<img id="img2" src="<?php echo $ssFolder.'/'.$ssPictures[$pictureIdx[$nextIdx]]['name']?>" alt="slideshow frame" />
 				</div>
-				<div id="ly1" <?php echo 'style="'. ($browser=='IE'? 'filter:alpha(opacity=100);' : '-moz-opacity:1.0;') . '"';?>>
+				<div id="ly1" <?php echo 'style="opacity: 1.0;"';?>>
 					<img id="img1" src="<?php echo $ssFolder.'/'.$ssPictures[$pictureIdx[$idx]]['name']?>" alt="slideshow frame" />
 				</div>
 			</div><?php

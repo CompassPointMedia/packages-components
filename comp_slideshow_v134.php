@@ -127,17 +127,6 @@ if(!function_exists('get_contents')){
 		}
 	}
 }
-if(!$browser){
-	if(preg_match('/^Mozilla\/4/i',$_SERVER['HTTP_USER_AGENT'])){
-		$browser='IE';
-	}else if(preg_match('/^Mozilla\/5/i',$_SERVER['HTTP_USER_AGENT'])){
-		$browser='Moz';
-	}else if(!stristr($_SERVER['HTTP_USER_AGENT'],'Gigabot') && !stristr($_SERVER['HTTP_USER_AGENT'],'msnbot')){
-		#mail($technicalEmail,'Unknown browser type',$_SERVER['HTTP_USER_AGENT'],$fromHdrBugs);
-		$browser='Moz'; #assume
-	}
-}
-
 
 
 //--------- coding before HML output here ----------------
@@ -422,12 +411,12 @@ if(count($ssPictures)){
 					please wait while the slideshow loads..
 				</span>
 				<?php echo $ssWait=get_contents();?>
-				<div id="ly2" <?php echo 'style="display:none;'. ($browser=='IE'? 'filter:alpha(opacity=0);' : '-moz-opacity:0.0;') . '"';?>>
+				<div id="ly2" <?php echo 'style="display:none; opacity: 0.0;"';?>>
 					<?php if($ssSlideArticle){?><a href="<?php echo $ssSlideArticleLink.'?Articles_ID='.$ssPictures[$pictureIdx[$nextIdx]]['ID'];?>"><?php }?>
 					<img id="img2" src="<?php echo ($ssPictures[$pictureIdx[$nextIdx]]['path'] ? $ssPictures[$pictureIdx[$nextIdx]]['path'] : $ssFolder).'/'.$ssPictures[$pictureIdx[$nextIdx]]['name']?>" alt="slideshow frame" />
 					<?php if($ssSlideArticle){?></a><?php }?>
 				</div>
-				<div id="ly1" <?php echo 'style="display:block;'. ($browser=='IE'? 'filter:alpha(opacity=100);' : '-moz-opacity:1.0;') . '"';?>>
+				<div id="ly1" <?php echo 'style="display:block; opacity: 1.0;"';?>>
 					<?php if($ssSlideArticle){?><a href="<?php echo $ssSlideArticleLink.'?Articles_ID='.$ssPictures[$pictureIdx[$idx]]['ID'];?>"><?php }?>
 					<img id="img1" src="<?php echo ($ssPictures[$pictureIdx[$idx]]['path'] ? $ssPictures[$pictureIdx[$idx]]['path'] : $ssFolder).'/'.$ssPictures[$pictureIdx[$idx]]['name']?>" alt="slideshow frame" />
 					<?php if($ssSlideArticle){?></a><?php }?>

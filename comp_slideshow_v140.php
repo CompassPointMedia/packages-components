@@ -405,12 +405,12 @@ if(count($ssPictures)){
 					please wait while the slideshow loads..
 				</span>
 				<?php echo $ssWait=get_contents();?>
-				<div id="ly2" <?php echo 'style="display:none;'. ($browser=='IE'? 'filter:alpha(opacity=0);' : '-moz-opacity:0.0;') . '"';?>>
+				<div id="ly2" <?php echo 'style="display:none; opacity: 0.0;"';?>>
 					<?php if($ssSlideArticleLink){?><a href="<?php echo $ssSlideArticleLink.'?Articles_ID=';?>" onclick="return slideArticleLink(this);"><?php }?>
 					<img id="img2" src="<?php echo ($ssRemoteSource ? $ssRemoteSource : ($ssPictures[$pictureIdx[$nextIdx]]['path'] ? $ssPictures[$pictureIdx[$nextIdx]]['path'] : $ssFolder)).'/'.$ssPictures[$pictureIdx[$nextIdx]]['name']?>" alt="slideshow frame" />
 					<?php if($ssSlideArticleLink){?></a><?php }?>
 				</div>
-				<div id="ly1" <?php echo 'style="display:block;'. ($browser=='IE'? 'filter:alpha(opacity=100);' : '-moz-opacity:1.0;') . '"';?>>
+				<div id="ly1" <?php echo 'style="display:block; opacity: 1.0;"';?>>
 					<?php if($ssSlideArticleLink){?><a href="<?php echo $ssSlideArticleLink.'?Articles_ID=';?>" onclick="return slideArticleLink(this);"><?php }?>
 					<img id="img1" src="<?php echo ($ssRemoteSource ? $ssRemoteSource : ($ssPictures[$pictureIdx[$idx]]['path'] ? $ssPictures[$pictureIdx[$idx]]['path'] : $ssFolder)).'/'.$ssPictures[$pictureIdx[$idx]]['name']?>" alt="slideshow frame" />
 					<?php if($ssSlideArticleLink){?></a><?php }?>

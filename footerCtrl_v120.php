@@ -40,14 +40,14 @@ if(!isset($enhancedSitePages))$enhancedSitePages=false; //my-chocolate-company-s
 
 if(empty($footerCtrlURL))$footerCtrlURL='http://www.compasspoint-sw.com/admin_help.php?ref='.$MASTER_DATABASE;
 
-if(!isset($footerCtrlLeftBracket))$footerCtrlLeftBracket='[';
-if(!isset($footerCtrlRightBracket))$footerCtrlRightBracket=']';
-if(empty($footerCtrlLabelEditor))$footerCtrlLabelEditor='Site Editor';
-if(empty($footerCtrlLabelConsole))$footerCtrlLabelConsole='Admin Console';
-if(empty($footerCtrlLabelAdminHelp))$footerCtrlLabelAdminHelp='Admin Help';
-if(empty($footerCtrlSiteMapLabel))$footerCtrlSiteMapLabel='Site Map';
-if(!isset($footerCtrlSeperator))$footerCtrlSeperator='|';
-if(empty($footerCtrolSiteMapURL))$footerCtrolSiteMapURL=(
+if(!isset($footerCtrlLeftBracket))      $footerCtrlLeftBracket='[';
+if(!isset($footerCtrlRightBracket))     $footerCtrlRightBracket=']';
+if(empty($footerCtrlLabelEditor))       $footerCtrlLabelEditor='Site Editor';
+if(empty($footerCtrlLabelConsole))      $footerCtrlLabelConsole='Admin Console';
+if(empty($footerCtrlLabelAdminHelp))    $footerCtrlLabelAdminHelp='Admin Help';
+if(empty($footerCtrlSiteMapLabel))      $footerCtrlSiteMapLabel='Site Map';
+if(!isset($footerCtrlSeparator))        $footerCtrlSeparator='|';
+if(empty($footerCtrlSiteMapURL))        $footerCtrlSiteMapURL=(
 	$enhancedSitePages ? 
 	strtolower(implode("-",explode(" ",preg_replace('/[^a-zA-Z0-9\s]/','',$companyName)))).'-site-map.php' :
 	'site_map.php'
@@ -82,7 +82,7 @@ if(!empty($footerCtrlRewrite)) ob_start();
 		if(!empty($footerCtrlArray) && is_array($footerCtrlArray)){
 			foreach($footerCtrlArray as $n=>$v){
 				?>
-				<span id="<?php echo $v['id'] ?>" class="<?php echo $v['class']?>"><?php echo $footerCtrlLeftBracket?><a title="<?php echo $n?>" href="<?php echo $v['link']?>"><?php echo $v['text']?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
+				<span id="<?php echo $v['id'] ?>" class="<?php echo $v['class']?>"><?php echo $footerCtrlLeftBracket?><a title="<?php echo $n?>" href="<?php echo $v['link']?>"><?php echo $v['text']?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeparator;?>
 				<?php
 			}
 		}
@@ -94,7 +94,7 @@ if(!empty($footerCtrlRewrite)) ob_start();
 		<?php
 		//-------- site map --------
 		if(empty($hideSiteMap)){?>
-			<span id="footerSiteMapLink"><?php echo $footerCtrlLeftBracket?><a href="/<?php echo $footerCtrolSiteMapURL?>" title="The site map of <?php echo $companyName?>"><?php echo $footerCtrlSiteMapLabel?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
+			<span id="footerSiteMapLink"><?php echo $footerCtrlLeftBracket?><a href="/<?php echo $footerCtrlSiteMapURL?>" title="The site map of <?php echo $companyName?>"><?php echo $footerCtrlSiteMapLabel?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeparator;?>
 			<?php 
 		}
 
@@ -122,24 +122,24 @@ if(!empty($footerCtrlRewrite)) ob_start();
                 $link = rtrim($link, '?&');
 			}
 			?>
-			<span id="footerSiteEditorLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $link?>" title="<?php echo $siteName?> real-time site editor"><?php echo $adminMode?'Leave ':''?><?php echo $footerCtrlLabelEditor ?></a><?php
+			<span id="footerSiteEditorLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $link?>" title="<?php if(!empty($siteName)) echo $siteName?> real-time site editor"><?php echo $adminMode?'Leave ':''?><?php echo $footerCtrlLabelEditor ?></a><?php
 			if($adminMode){
 				?> - <span id="div0exp" onclick="if(typeof div0exp=='function'){ div0exp(); }else{ alert('This is not set up on your site'); }"><?php echo $_COOKIE['layoutMgr']=='none'?'show layout manager':'hide layout manager'?></span><?php
 			}
-			?><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
+			?><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeparator;?>
 			<?php 
 		}
 
 		//-------- console ---------
 		if(empty($hideConsoleLink)){ ?>
-			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="/console/" title="<?php echo $siteName?> administrative console"><?php echo $footerCtrlLabelConsole?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
+			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="/console/" title="<?php if(!empty($siteName)) echo $siteName?> administrative console"><?php echo $footerCtrlLabelConsole?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeparator;?>
 			<?php
 		} 
 
 		//----------- help ----------
 		if(empty($hideAdminHelp)){
 			?>
-			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $footerCtrlURL?>" title="<?php echo $siteName?> administrative console"><?php echo $footerCtrlLabelAdminHelp?></a><?php echo $footerCtrlRightBracket?></span>
+			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $footerCtrlURL?>" title="<?php if(!empty($siteName)) echo $siteName?> administrative console"><?php echo $footerCtrlLabelAdminHelp?></a><?php echo $footerCtrlRightBracket?></span>
 			<?php  
 		}
 		?>
