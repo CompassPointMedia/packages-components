@@ -38,22 +38,22 @@ Parker
 /* THIS IS A GLOBAL VARIABLE, NOT A FOOTER VARIABLE */
 if(!isset($enhancedSitePages))$enhancedSitePages=false; //my-chocolate-company-site-map.php - long page system
 
-if(!$footerCtrlURL)$footerCtrlURL='http://www.compasspoint-sw.com/admin_help.php?ref='.$MASTER_DATABASE;
+if(empty($footerCtrlURL))$footerCtrlURL='http://www.compasspoint-sw.com/admin_help.php?ref='.$MASTER_DATABASE;
 
 if(!isset($footerCtrlLeftBracket))$footerCtrlLeftBracket='[';
 if(!isset($footerCtrlRightBracket))$footerCtrlRightBracket=']';
-if(!$footerCtrlLabelEditor)$footerCtrlLabelEditor='Site Editor';
-if(!$footerCtrlLabelConsole)$footerCtrlLabelConsole='Admin Console';
-if(!$footerCtrlLabelAdminHelp)$footerCtrlLabelAdminHelp='Admin Help';
-if(!$footerCtrlSiteMapLabel)$footerCtrlSiteMapLabel='Site Map';
+if(empty($footerCtrlLabelEditor))$footerCtrlLabelEditor='Site Editor';
+if(empty($footerCtrlLabelConsole))$footerCtrlLabelConsole='Admin Console';
+if(empty($footerCtrlLabelAdminHelp))$footerCtrlLabelAdminHelp='Admin Help';
+if(empty($footerCtrlSiteMapLabel))$footerCtrlSiteMapLabel='Site Map';
 if(!isset($footerCtrlSeperator))$footerCtrlSeperator='|';
-if(!$footerCtrolSiteMapURL)$footerCtrolSiteMapURL=(
+if(empty($footerCtrolSiteMapURL))$footerCtrolSiteMapURL=(
 	$enhancedSitePages ? 
 	strtolower(implode("-",explode(" ",preg_replace('/[^a-zA-Z0-9\s]/','',$companyName)))).'-site-map.php' :
 	'site_map.php'
 );
 
-if(!$footerCtrlLabelCopyright)$footerCtrlLabelCopyright='All images and written content on this site &copy;'.$companyName.' 2009-'.date('Y').'.  Copying or reproduction of images or written content, other than brief references, is prohibited except by express permission from '.$companyName;
+if(empty($footerCtrlLabelCopyright)) $footerCtrlLabelCopyright='All images and written content on this site &copy;'.$companyName.' 2009-'.date('Y').'.  Copying or reproduction of images or written content, other than brief references, is prohibited except by express permission from '.$companyName;
  
 if(false){
 	//sample CSS coding, modify as needed by site
@@ -69,7 +69,7 @@ if(false){
 
 
 
-if($footerCtrlRewrite)ob_start();
+if(!empty($footerCtrlRewrite)) ob_start();
 ?>
 <div id="footerCtrl">
 	<?php 
@@ -79,7 +79,7 @@ if($footerCtrlRewrite)ob_start();
 	<div id="footerLinks">
 		<?php
 		//first section - user-defined links
-		if(is_array($footerCtrlArray)){
+		if(!empty($footerCtrlArray) && is_array($footerCtrlArray)){
 			foreach($footerCtrlArray as $n=>$v){
 				?>
 				<span id="<?php echo $v['id'] ?>" class="<?php echo $v['class']?>"><?php echo $footerCtrlLeftBracket?><a title="<?php echo $n?>" href="<?php echo $v['link']?>"><?php echo $v['text']?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
@@ -93,22 +93,22 @@ if($footerCtrlRewrite)ob_start();
 		<span id="footerCtrlTools">
 		<?php
 		//-------- site map --------
-		if(!$hideSiteMap){?>
+		if(empty($hideSiteMap)){?>
 			<span id="footerSiteMapLink"><?php echo $footerCtrlLeftBracket?><a href="/<?php echo $footerCtrolSiteMapURL?>" title="The site map of <?php echo $companyName?>"><?php echo $footerCtrlSiteMapLabel?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
 			<?php 
 		}
 
 		//-------- site editor -------
-		if(!$hideSiteEditorLink){
+		if(empty($hideSiteEditorLink)){
 
             $src = ($thispage=='juliet-site-editor' || $thispage == 'login' ? '' : 'src='.urlencode($_SERVER['REQUEST_URI']));
-			if($siteEditorLinkType=='cgi'){
+			if(!empty($siteEditorLinkType) && $siteEditorLinkType=='cgi'){
 			    $link = '/cgi/login.php?';
 			    $link .= ($adminMode ? 'logout=1&' : '');
 			    $link .= $src;
 			    $link = rtrim($link, '?&');
 
-			}else if($siteEditorLinkType=='console'){
+			}else if(!empty($siteEditorLinkType) && $siteEditorLinkType=='console'){
 			    $link = '/console/admin?';
 			    $link .= ($adminMode ? 'logout=1&' : '');
                 $link .= $src;
@@ -131,13 +131,13 @@ if($footerCtrlRewrite)ob_start();
 		}
 
 		//-------- console ---------
-		if(!$hideConsoleLink){ ?>
+		if(empty($hideConsoleLink)){ ?>
 			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="/console/" title="<?php echo $siteName?> administrative console"><?php echo $footerCtrlLabelConsole?></a><?php echo $footerCtrlRightBracket?></span> <?php echo $footerCtrlSeperator;?>
 			<?php
 		} 
 
 		//----------- help ----------
-		if(!$hideAdminHelp){ 
+		if(empty($hideAdminHelp)){
 			?>
 			<span id="footerConsoleLink"><?php echo $footerCtrlLeftBracket?><a rel="nofollow" href="<?php echo $footerCtrlURL?>" title="<?php echo $siteName?> administrative console"><?php echo $footerCtrlLabelAdminHelp?></a><?php echo $footerCtrlRightBracket?></span>
 			<?php  
@@ -151,7 +151,7 @@ if($footerCtrlRewrite)ob_start();
 	echo $footerCtrlFooterLinks=get_contents();
 
 	//copyrightText
-	if(!$hideCopyrightText){
+	if(empty($hideCopyrightText)){
 		ob_start();
 		if(!$companyName)mail($adminEmail, 'Error file '.__FILE__.', line '.__LINE__,get_globals('No variable $companyName set for the footer controls copyright section'),$fromHdrBugs);
 		?><span class="copyrightText">
@@ -161,7 +161,7 @@ if($footerCtrlRewrite)ob_start();
 	}
 
 	//siteCredits
-	if(!$hideSiteCredits){ 
+	if(empty($hideSiteCredits)){
 		ob_start();
 		?><div id="siteCredits">
 		Site design by <a href="http://www.compasspoint-sw.com/?ref=<?php echo $_SERVER['HTTP_HOST']?>">Compass Point Media</a>
@@ -171,8 +171,7 @@ if($footerCtrlRewrite)ob_start();
 	}
 	?>
 </div><?php
-if($footerCtrlRewrite){
+if(!empty($footerCtrlRewrite)){
 	$footerCtrlOutput=ob_get_contents();
 	ob_end_clean();
 }
-?>
